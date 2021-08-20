@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 duolingo-api = "*"
+flask = "*"
 
 [dev-packages]
 nose = "*"
