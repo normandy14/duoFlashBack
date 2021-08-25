@@ -1,6 +1,7 @@
 # Third party modules
 import pytest
 import json
+import os
 
 # First party modules
 from app import create_app
@@ -16,6 +17,13 @@ def test_hello(client):
     rv = client.get("/hello")
     assert b"<p>Hello, World!<p>" == rv.data
 
+
+def test_auth(client):
+    rv = client.get('/auth')
+    json_dict = json.loads(rv.data)
+    print(json_dict)
+    assert True == False
+    
 '''
 def test_session(client):
     rv = client.get("/user")
@@ -26,3 +34,4 @@ def test_chopstick(client):
     rv = client.get("/chopstick/")
     json_dict = json.loads(rv.data)
     assert "bamboo" == json_dict['color']
+    

@@ -3,12 +3,24 @@ import duolingo
 import os
 from markupsafe import escape
 
+class Session:
+    def __init__(self, username, password):
+        self.lingo = duolingo.Duolingo(username, password)
+
 def create_app():
     project_root = os.path.dirname(__file__)
     template_path = os.path.join(project_root, './templates')
     
+    '''
+    username = os.getenv('USERNAME')
+    password = os.getenv('PASSWORD')
+        
+    lingo = Session(username, password)
+    '''
+    
     app = Flask(__name__, template_folder=template_path)
     app.config['TESTING'] = True
+    
 
     @app.route('/hello')
     def hello_world():
@@ -18,9 +30,12 @@ def create_app():
     def hi(name):
         return f"<p>Hi {escape(name)}!</p>"
         
-    @app.route('/user')
-    def user():
-        pass
+    @app.route('/auth')
+    def auth():
+        username = os.getenv('USERNAME')
+        password = os.getenv('PASSWORD')
+        lingo = duolingo.Duolingo(username, password)
+        return jsonify(lingo.get_known_words('es'))
         '''
         user = os.getenv('USERNAME')
         print (user)
@@ -32,8 +47,6 @@ def create_app():
             'color': 'bamboo',
             'left_handed': True
         }
-        #print (jsonify(chopstick).json)
-        #print (jsonify(chopstick['color']).json)
         return jsonify(chopstick)
         
     return app

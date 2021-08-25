@@ -8,6 +8,7 @@ duolingo-api = "*"
 Flask = "*"
 pytest-flask = "*"
 python-dotenv = "*"
+pytest-env = "*"
 
 [dev-packages]
 nose = "*"
