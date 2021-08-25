@@ -11,13 +11,6 @@ def create_app():
     project_root = os.path.dirname(__file__)
     template_path = os.path.join(project_root, './templates')
     
-    '''
-    username = os.getenv('USERNAME')
-    password = os.getenv('PASSWORD')
-        
-    lingo = Session(username, password)
-    '''
-    
     app = Flask(__name__, template_folder=template_path)
     app.config['TESTING'] = True
     
@@ -30,24 +23,19 @@ def create_app():
     def hi(name):
         return f"<p>Hi {escape(name)}!</p>"
         
-    @app.route('/auth')
-    def auth():
+    @app.route('/auth/<string:lang>')
+    def auth(lang):
         username = os.getenv('USERNAME')
         password = os.getenv('PASSWORD')
-        lingo = duolingo.Duolingo(username, password)
-        return jsonify(lingo.get_known_words('es'))
-        '''
-        user = os.getenv('USERNAME')
-        print (user)
-        return user
-        '''
-    @app.route('/chopstick/')
-    def chopstick():
-        chopstick = {
-            'color': 'bamboo',
-            'left_handed': True
-        }
-        return jsonify(chopstick)
+        known_words = []
+        known_pairs = {}
+        try:
+            lingo = duolingo.Duolingo(username, password)
+            known_words = lingo.get_known_words(lang)
+            known_pairs = lingo.get_translations(known_words, source='es', target='en')
+        except KeyError:
+            print ("language not learned")
+        return jsonify(known_pairs)
         
     return app
 

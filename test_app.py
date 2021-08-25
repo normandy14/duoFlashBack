@@ -19,19 +19,7 @@ def test_hello(client):
 
 
 def test_auth(client):
-    rv = client.get('/auth')
+    rv = client.get('/auth/es')
     json_dict = json.loads(rv.data)
-    print(json_dict)
-    assert True == False
-    
-'''
-def test_session(client):
-    rv = client.get("/user")
-    assert 1 == 1
-'''
-    
-def test_chopstick(client):
-    rv = client.get("/chopstick/")
-    json_dict = json.loads(rv.data)
-    assert "bamboo" == json_dict['color']
-    
+    assert 'two' in json_dict['dos'] # Enter known words and translations from your account
+    assert 'brother' in json_dict['hermano']
