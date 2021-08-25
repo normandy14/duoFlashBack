@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 import duolingo
 import os
 from markupsafe import escape
@@ -26,6 +26,15 @@ def create_app():
         print (user)
         return user
         '''
+    @app.route('/chopstick/')
+    def chopstick():
+        chopstick = {
+            'color': 'bamboo',
+            'left_handed': True
+        }
+        #print (jsonify(chopstick).json)
+        #print (jsonify(chopstick['color']).json)
+        return jsonify(chopstick)
         
     return app
 
