@@ -7,6 +7,7 @@ name = "pypi"
 duolingo-api = "*"
 Flask = "*"
 pytest-flask = "*"
+python-dotenv = "*"
 
 [dev-packages]
 nose = "*"

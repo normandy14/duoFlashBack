@@ -14,9 +14,18 @@ def create_app():
     def hello_world():
         return render_template('hello.html')
     
-    @app.route("/hi/<name>")
+    @app.route('/hi/<name>')
     def hi(name):
         return f"<p>Hi {escape(name)}!</p>"
+        
+    @app.route('/user')
+    def user():
+        pass
+        '''
+        user = os.getenv('USERNAME')
+        print (user)
+        return user
+        '''
         
     return app
 
