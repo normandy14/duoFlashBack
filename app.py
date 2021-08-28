@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, request, jsonify
 import duolingo
 import os
 from markupsafe import escape
@@ -23,10 +23,19 @@ def create_app():
     def hi(name):
         return f"<p>Hi {escape(name)}!</p>"
         
-    @app.route('/auth/<string:lang>')
+    @app.route('/auth/<string:lang>', methods = ['GET', 'POST'])
     def auth(lang):
-        username = os.getenv('USERNAME')
-        password = os.getenv('PASSWORD')
+        duoPairs = {}
+        if (app.config['TESTING'] == True) and (request.method == 'GET'):
+            print ("Testing config is on!")
+            username = os.getenv('USERNAME')
+            password = os.getenv('PASSWORD')
+            duoPairs = getDuoPairs(username, password, escape(lang))
+        elif request.method == 'POST':
+            print ("POST method is true")
+        return jsonify(duoPairs)
+        
+    def getDuoPairs(username, password, lang):
         known_words = []
         known_pairs = {}
         try:
@@ -35,7 +44,7 @@ def create_app():
             known_pairs = lingo.get_translations(known_words, source='es', target='en')
         except KeyError:
             print ("language not learned")
-        return jsonify(known_pairs)
+        return known_pairs
         
     return app
 
