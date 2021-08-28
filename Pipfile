@@ -9,6 +9,7 @@ Flask = "*"
 pytest-flask = "*"
 python-dotenv = "*"
 pytest-env = "*"
+flask-cors = "*"
 
 [dev-packages]
 nose = "*"

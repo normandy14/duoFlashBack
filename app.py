@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, jsonify
 import duolingo
 import os
 from markupsafe import escape
+from flask_cors import cross_origin
+import json
 
 class Session:
     def __init__(self, username, password):
@@ -20,11 +22,14 @@ def create_app():
         return render_template('hello.html')
     
     @app.route('/hi/<name>')
+    @cross_origin()
     def hi(name):
         return f"<p>Hi {escape(name)}!</p>"
         
     @app.route('/auth/<string:lang>', methods = ['GET', 'POST'])
+    @cross_origin()
     def auth(lang):
+        lang = escape(lang)
         duoPairs = {}
         if (app.config['TESTING'] == True) and (request.method == 'GET'):
             print ("Testing config is on!")
@@ -33,6 +38,11 @@ def create_app():
             duoPairs = getDuoPairs(username, password, escape(lang))
         elif request.method == 'POST':
             print ("POST method is true")
+            cred = json.loads(request.data.decode("utf-8"))
+            print (cred)
+            print (type(cred))
+            duoPairs = getDuoPairs(cred['username'], cred['password'], lang)
+        # print (duoPairs)
         return jsonify(duoPairs)
         
     def getDuoPairs(username, password, lang):
