@@ -10,9 +10,9 @@ DuoFlash, a backend to obtain words that you've learned on the Duolingo web/andr
 
 3. :recycle: Continue to translate missed words until you complete the translation cycle.
 
-## Motivation
+This app is based on my duoTerminal app
 
-![App](https://github.com/normandy14/duoTerminal/blob/master/doc/screenshot.png?raw=true)
+## Motivation
 
 Duoterminal is a project created for the user that wants to supplement their language learning on the Duolingo platform with additional learning tools. Duolingo is a great learning tool, but its web/android/ios iterface is bulky. The main app also forces user to learn and reinforce learned words in sentences.
 
