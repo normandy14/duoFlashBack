@@ -64,7 +64,7 @@ Its recommended to create your own .env to store your duolingo account/ dummy ac
 
 The username and password will be visible in plain text, so also configure .gitignore to ignore this file. For this project, the file is ignored by default.
 
-### Install the .env File
+### Add the .env File
 
 1. `cd` to directory
 2. `touch .env`
