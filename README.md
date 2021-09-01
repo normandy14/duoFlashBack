@@ -98,7 +98,9 @@ pipenv install pytest
 ```
 3. Follow instructions for Install .Env, but name file pytest.ini, with same security precautions
   
-  ### Add pytest.ini File (credential management for pytest)
+  ### Add pytest.ini File
+  
+  (credential management for pytest)
 
 1. `cd` to directory
 2. `touch pytest.ini`
