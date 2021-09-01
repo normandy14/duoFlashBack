@@ -21,7 +21,7 @@ def create_app():
     def hello_world():
         return render_template('hello.html')
     
-    @app.route('/hi/<name>')
+    @app.route('/hi/<name>', methods = ['GET', 'POST'])
     @cross_origin()
     def hi(name):
         return f"<p>Hi {escape(name)}!</p>"
@@ -39,10 +39,7 @@ def create_app():
         elif request.method == 'POST':
             print ("POST method is true")
             cred = json.loads(request.data.decode("utf-8"))
-            print (cred)
-            print (type(cred))
             duoPairs = getDuoPairs(cred['username'], cred['password'], lang)
-        # print (duoPairs)
         return jsonify(duoPairs)
         
     def getDuoPairs(username, password, lang):
