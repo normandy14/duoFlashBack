@@ -64,7 +64,7 @@ Its recommended to create your own .env to store your duolingo account/ dummy ac
 
 The username and password will be visible in plain text, so also configure .gitignore to ignore this file. For this project, the file is ignored by default.
 
-### Install the.Env File
+### Install the .env File
 
 1. `cd` to directory
 2. `touch .env`
@@ -97,6 +97,15 @@ pipenv shell
 pipenv install pytest
 ```
 3. Follow instructions for Install .Env, but name file pytest.ini, with same security precautions
+  
+  ### Add pytest.ini File (credential management for pytest)
+
+1. `cd` to directory
+2. `touch pytest.ini`
+3. open the pytest.ini file
+4. Type: `EXPORT USERNAME[Your Username]` where 'Your Username' is the username of the account
+5. Type `EXPORT PASSWORD[Your Password]` where 'Your Password' is the password of the account
+6. Save the file
   
 4. :snake: Run the tests
 
