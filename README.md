@@ -1,26 +1,24 @@
-# DuoFlash
+# DuoFlashBack
 
 ![Duo](https://vignette.wikia.nocookie.net/duolingo/images/b/be/Duo_2019.png/revision/latest?cb=20190307143704)
 
-DuoFlash, a backend to obtain words that you've learned on the Duolingo web/android/ios platform, all from the convenience of your personal terminal.
-
-1. :brain: Effortlessly Enjoy the learning vocabulary reinforcement process, without even opening a web browser.
-
-2. :pencil2: Translate each word from your target language to English, or try your hand at translating from English to your target language. The choice is yours!
-
-3. :recycle: Continue to translate missed words until you complete the translation cycle.
-
-This app is based on my duoTerminal app
+This is the back end of the improved [DuoTerminal App](https://github.com/normandy14/duoTerminal).
 
 ## Motivation
 
-Duoterminal is a project created for the user that wants to supplement their language learning on the Duolingo platform with additional learning tools. Duolingo is a great learning tool, but its web/android/ios iterface is bulky. The main app also forces user to learn and reinforce learned words in sentences.
+The previous [duoTerminal app](https://github.com/normandy14/duoTerminal) lacked a proper modern gui for use and navigation. Instead, it relies on the terminal for input and output. The interaction is like the following:
 
-DuoTerminal allows for reinforcement of learned words in isolation. It also requires the user to type in by hand the translation of the individual words, unlike the Duolingo app which encourages the user to click the correct translation of a sentence.
+![App](https://github.com/normandy14/duoTerminal/blob/master/doc/screenshot.png?raw=true)
 
-Pip3 should be installed before Pipenv because Pip3 is needed to install Pipenv.
+DuoFlash is created for the user that wants to supplement their language learning on the Duolingo platform with additional learning tools. Duolingo is a great learning tool, but its web/android/ios iterface is bulky. The user learns already encountered words on the Duolingo platform with flash cards
+
+In addition, the duoTerminal project is archived because it was difficult to maintain because it was poorly written in some aspects. I document this in the previous project, [duoTerminal app](https://github.com/normandy14/duoTerminal)
 
 ### Installing
+
+[Pip3](https://pip.pypa.io/en/stable/) should be installed before [Pipenv](https://pipenv.pypa.io/en/latest/) because Pip3 is needed to install Pipenv.
+
+### Getting Started
 
 A step by step series of examples that tell you how to get a development env running.
 
@@ -48,16 +46,44 @@ pipenv install
 pipenv run python3 app.py
 ```
 
-You will be presented with a menu such as the following, when you run the program successfully:
+### After Run
 
-```
-welcome to duo terminal: review duolingo words on your terminal
-select: (l)ogin or (q)uit
-```
+The backend API is now running. Go to http://localhost:6500/auth/<lang> to see output in web browser.
+  
+Substitue lang for the language you use such as es - for Spanish, ar -f or  Arabic or fr - for French.
+See Bash config for intructions to get your personal Duolingo user account or dummy user account set.
 
+For example, to get the Spanish words associated with the Duolingo account:
+
+  http://localhost:6500/auth/es
+  
+### Bash Setup
+
+To reduce the time it takes to repeately type in the username and password correctly, for each seperate API requests.
+Its recommended to create your own .env to store your duolingo account/ dummy account.
+
+The username and password will be visible in plain text, so also configure .gitignore to ignore this file. For this project, the file is ignored by default.
+
+### Add the .env File
+
+1. `cd` to directory
+2. `touch .env`
+3. open the .env file
+4. Type: `EXPORT USERNAME[Your Username]` where 'Your Username' is the username of the account
+5. Type `EXPORT PASSWORD[Your Password]` where 'Your Password' is the password of the account
+6. Save the file
+
+Duplicate paragraph, if now ready to go to endpoint:
+  
+The backend API is now running. Go to http://localhost:6500/auth/<lang> to see output in web browser.
+Substitue lang for the language you use such as es - for Spanish, ar -f or  Arabic or fr - for French.
+See Bash config for intructions to get your personal Duolingo user account or dummy user account set up.
+  
 ## Running the tests
 
 Explain how to run the automated tests for this system:
+  
+### Setting Up Test
 
 1. :snake: Enter the shell enviroment
 
@@ -68,25 +94,33 @@ pipenv shell
 2. :snake: Install the dependencies
 
 ```
-pipenv install --dev
+pipenv install pytest
+```
+3. Follow instructions for Install .Env, but name file pytest.ini, with same security precautions
+  
+  ### Add pytest.ini File
+  
+  (credential management for pytest)
+
+1. `cd` to directory
+2. `touch pytest.ini`
+3. open the pytest.ini file
+4. Type: `EXPORT USERNAME[Your Username]` where 'Your Username' is the username of the account
+5. Type `EXPORT PASSWORD[Your Password]` where 'Your Password' is the password of the account
+6. Save the file
+  
+4. :snake: Run the tests
+
+```
+pipenv run pytest
 ```
 
-3. :snake: Run the tests
+### Output of Tests
 
 ```
-pipenv run nosetests testApp.py
-```
-
-### Break down into end to end tests
-
-Explain what these tests test and why.
-
-The methods tests the data processing and manipulation of the data stored in hashes:
-
-```
-pipenv run nosetests testApp.py
+pipenv run pytest
 ----------------------------------------------------------------------
-Ran 14 tests in 0.005s
+Ran 2 tests in 0.005s
 
 OK
 ```
