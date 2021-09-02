@@ -1,13 +1,10 @@
 from flask import Flask, render_template, request, jsonify
+from session import Session
 import duolingo
 import os
 from markupsafe import escape
 from flask_cors import cross_origin
 import json
-
-class Session:
-    def __init__(self, username, password):
-        self.lingo = duolingo.Duolingo(username, password)
 
 def create_app():
     project_root = os.path.dirname(__file__)
